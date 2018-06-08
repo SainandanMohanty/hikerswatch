@@ -52,8 +52,7 @@
             android:id="@+id/latitude_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="123456789" />
+            android:layout_marginStart="16dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -65,8 +64,7 @@
             android:id="@+id/longitude_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="123456789" />
+            android:layout_marginStart="16dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -78,8 +76,7 @@
             android:id="@+id/altitude_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="123456789" />
+            android:layout_marginStart="16dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -91,8 +88,7 @@
             android:id="@+id/accuracy_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="123456789" />
+            android:layout_marginStart="16dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -105,8 +101,7 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="India" />
+            android:layout_marginStart="16dp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
