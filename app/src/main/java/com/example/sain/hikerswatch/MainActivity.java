@@ -66,35 +66,40 @@ public class MainActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && locationManager != null) {
-            updateLocation(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastKnownLocation != null) {
+                updateLocation(lastKnownLocation);
+            }
         }
     }
 
     private void updateLocation(Location location) {
-        TextView latitude = findViewById(R.id.latitude_value);
-        TextView longitude = findViewById(R.id.longitude_value);
-        TextView altitude = findViewById(R.id.altitude_value);
-        TextView accuracy = findViewById(R.id.accuracy_value);
-        TextView address = findViewById(R.id.address);
+        if (location != null) {
+            TextView latitude = findViewById(R.id.latitude_value);
+            TextView longitude = findViewById(R.id.longitude_value);
+            TextView altitude = findViewById(R.id.altitude_value);
+            TextView accuracy = findViewById(R.id.accuracy_value);
+            TextView address = findViewById(R.id.address);
 
-        String addressString = "";
+            String addressString = "";
 
-        latitude.setText(String.valueOf(location.getLatitude()));
-        longitude.setText(String.valueOf(location.getLongitude()));
-        altitude.setText(String.valueOf(location.getAltitude()));
-        accuracy.setText(String.valueOf(location.getAccuracy()));
+            latitude.setText(String.valueOf(location.getLatitude()));
+            longitude.setText(String.valueOf(location.getLongitude()));
+            altitude.setText(String.valueOf(location.getAltitude()));
+            accuracy.setText(String.valueOf(location.getAccuracy()));
 
-        Geocoder geocoder = new Geocoder(this);
-        try {
-            List<Address> addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            if (addressList != null) {
-                addressString = addressList.get(0).getAddressLine(0);
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                List<Address> addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                if (addressList != null) {
+                    addressString = addressList.get(0).getAddressLine(0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        address.setText(addressString.replace(", ", "\n"));
+            address.setText(addressString.replace(", ", "\n"));
+        }
     }
 }
