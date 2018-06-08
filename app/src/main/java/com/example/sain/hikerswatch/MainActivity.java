@@ -75,31 +75,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateLocation(Location location) {
-        if (location != null) {
-            TextView latitude = findViewById(R.id.latitude_value);
-            TextView longitude = findViewById(R.id.longitude_value);
-            TextView altitude = findViewById(R.id.altitude_value);
-            TextView accuracy = findViewById(R.id.accuracy_value);
-            TextView address = findViewById(R.id.address);
+        TextView latitude = findViewById(R.id.latitude_value);
+        TextView longitude = findViewById(R.id.longitude_value);
+        TextView altitude = findViewById(R.id.altitude_value);
+        TextView accuracy = findViewById(R.id.accuracy_value);
+        TextView address = findViewById(R.id.address);
 
-            String addressString = "";
+        String addressString = "";
 
-            latitude.setText(String.valueOf(location.getLatitude()));
-            longitude.setText(String.valueOf(location.getLongitude()));
-            altitude.setText(String.valueOf(location.getAltitude()));
-            accuracy.setText(String.valueOf(location.getAccuracy()));
+        latitude.setText(String.valueOf(location.getLatitude()));
+        longitude.setText(String.valueOf(location.getLongitude()));
+        altitude.setText(String.valueOf(location.getAltitude()));
+        accuracy.setText(String.valueOf(location.getAccuracy()));
 
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                List<Address> addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                if (addressList != null) {
-                    addressString = addressList.get(0).getAddressLine(0);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            List<Address> addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            if (addressList.size() > 0) {
+                addressString = addressList.get(0).getAddressLine(0);
+            } else {
+                addressString = "Couldn't determine address :(";
             }
-
-            address.setText(addressString.replace(", ", "\n"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        address.setText(addressString.replace(", ", "\n"));
     }
 }
